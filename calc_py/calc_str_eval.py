@@ -11,7 +11,20 @@ def readline() -> str:
 
 
 def parse_multi_or_div(equation: str) -> Union[int, float]:
-    return int(equation)
+    mult_index = equation.rfind("*")
+    div_index = equation.rfind("/")
+
+    if mult_index == -1 and div_index == -1:
+        return int(equation.strip())
+    elif mult_index == -1:
+        return parse_multi_or_div(equation[:div_index]) / parse_multi_or_div(equation[div_index + 1:])
+    elif div_index == -1:
+        return parse_multi_or_div(equation[:mult_index]) * parse_multi_or_div(equation[mult_index + 1:])
+    else:
+        if -1 < mult_index and mult_index < div_index :
+            return parse_multi_or_div(equation[:div_index]) / parse_multi_or_div(equation[div_index + 1:])
+        elif -1 < div_index and div_index < mult_index :
+            return parse_multi_or_div(equation[:mult_index]) * parse_multi_or_div(equation[mult_index + 1:])
 
 
 def parse_add_or_minus(equation: str) -> Union[int, float]:
