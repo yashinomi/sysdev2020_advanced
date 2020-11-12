@@ -37,31 +37,5 @@ class TestEquationParse(unittest.TestCase):
         self.assertEqual(correct, result)
 
 
-def main():
-    try:
-        correct: int = 3
-        equation: str = "0+1*3"
-        result = parse_add_or_minus(equation)
-        assert correct == result, f"want {correct}, got {result}"
-
-        correct: int = -1
-        equation: str = "0*3-1"
-        result = parse_add_or_minus(equation)
-        assert correct == result, f"want {correct}, got {result}"
-
-        correct: int = 0
-        equation: str = "2/2-1"
-        result = parse_add_or_minus(equation)
-        assert correct == result, f"want {correct}, got {result}"
-
-        correct: int = 5
-        equation: str = "2+3+1-2/2"
-        result = parse_add_or_minus(equation)
-        assert correct == result, f"want {correct}, got {result}"
-    
-    except AssertionError as err:
-        print("AssertionError :", err)
-
-
 if __name__ == "__main__":
-    main()
+    unittest.main()
